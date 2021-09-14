@@ -56,4 +56,12 @@ private MockMvc mvc;
                 .andExpect(content().string("4 + 5 + 6 = 15"));
 
     }
+
+    @Test
+    void mathVolumeReturnsVolumeOfARectangleUsingGet() throws Exception {
+        this.mvc.perform(get("/math/volume/3/4/5"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+
+    }
 }

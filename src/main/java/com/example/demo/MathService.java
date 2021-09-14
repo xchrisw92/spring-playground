@@ -31,4 +31,8 @@ public class MathService {
         else if(operation.equals("divide")){return "/";}
         else return "operation not valid";
     }
+
+    public static int calculateVolume(int x, int y, int z) {
+        return x*y*z;
+    }
 }

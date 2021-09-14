@@ -29,4 +29,11 @@ public class MathController {
         print += input.get("n").get(y+1) + " = " + MathService.sum(input.get("n"));
         return print;
     }
+
+    @RequestMapping("/volume/{x}/{y}/{z}")
+    String volume(@PathVariable int x, @PathVariable int y, @PathVariable int z){
+
+        return "The volume of a " + x + "x" + y + "x" + z + " rectangle is " + MathService.calculateVolume(x, y, z)
+                + ".";
+    }
 }
