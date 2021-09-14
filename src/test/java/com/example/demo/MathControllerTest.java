@@ -62,7 +62,7 @@ private MockMvc mvc;
     void mathVolumeReturnsVolumeOfARectangleUsingGet() throws Exception {
         this.mvc.perform(get("/math/volume/3/4/5"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60."));
 
     }
 
@@ -82,7 +82,7 @@ private MockMvc mvc;
                 .param("height", "4");
         this.mvc.perform(request1)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Area of a 2x4 rectangle is 8.0"));
+                .andExpect(content().string("Area of a 2x4 rectangle is 8.0."));
 
     }
 

@@ -7,8 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import javax.servlet.http.Cookie;
 import java.util.Random;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,15 +23,14 @@ public class FormDataControllerTest {
     @Test
     void testCreateComment() throws Exception {
 
-        String content = String.valueOf(new Random().nextInt());
         MockHttpServletRequestBuilder request1 = post("/string-example")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("content");
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"author\":\"Dwayne\", \"content\":\"Firsties!\"}");
 
 
         this.mvc.perform(request1)
                 .andExpect(status().isOk())
-                .andExpect(content().string(String.format("Dwayne said %s!", content)));
+                .andExpect(content().string(String.format("Dwayne said Firsties!")));
 
     }
 
@@ -55,6 +55,22 @@ public class FormDataControllerTest {
         this.mvc.perform(request1)
                 .andExpect(status().isOk())
                 .andExpect(content().string("postId:34 notify:me content:you author:him"));
+
+    }
+
+    @Test
+    void testCookies() throws Exception {
+
+        this.mvc.perform(get("/cookie").cookie(new Cookie("hello", "world")))
+                .andExpect(status().isOk())
+                .andExpect(content().string("world"));
+    }
+
+    @Test
+    void testHeaders() throws Exception {
+        this.mvc.perform(get("/header").header("Host", "example.com"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("example.com"));
 
     }
 }
