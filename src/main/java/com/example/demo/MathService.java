@@ -35,4 +35,12 @@ public class MathService {
     public static int calculateVolume(int x, int y, int z) {
         return x*y*z;
     }
+
+    public static double areaOfCircle(String radius) {
+        return Math.pow(Integer.parseInt(radius), 2) * Math.PI;
+    }
+
+    public static double areaOfRectangle(String width, String height) {
+        return Integer.parseInt(width) * Integer.parseInt(height);
+    }
 }

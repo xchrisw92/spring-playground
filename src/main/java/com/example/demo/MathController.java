@@ -3,6 +3,8 @@ package com.example.demo;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/math")
 
@@ -36,4 +38,15 @@ public class MathController {
         return "The volume of a " + x + "x" + y + "x" + z + " rectangle is " + MathService.calculateVolume(x, y, z)
                 + ".";
     }
+    @PostMapping("/area")
+    String area(@RequestParam Map<String, String> params){
+        if(params.get("type").equals("circle")){
+           return "Area of a circle with a radius of " + params.get("radius") + " is " +
+                   String.valueOf(MathService.areaOfCircle(params.get("radius"))) + ".";
+        } else if(params.get("type").equals("rectangle")){
+            return "Area of a " + params.get("width") + "x" + params.get("height") + " rectangle is " +
+                    String.valueOf(MathService.areaOfRectangle(params.get("width"), params.get("height"))) + ".";
+        } else { return "Invalid"; }
+    }
+
 }
