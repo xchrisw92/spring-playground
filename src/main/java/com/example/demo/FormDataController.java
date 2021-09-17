@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
 public class FormDataController {
 
     @PostMapping("/string-example")
-    public String getRawString(@RequestBody Map<String, String> body){
+    public String getRawString(@RequestBody MultiValueMap<String, String> body){
         return String.format("%s said %s", body.get("author"), body.get("content"));
     }
     @PostMapping("/individual-example")

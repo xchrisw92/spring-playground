@@ -8,7 +8,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import javax.servlet.http.Cookie;
-import java.util.Random;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,8 +23,10 @@ public class FormDataControllerTest {
     void testCreateComment() throws Exception {
 
         MockHttpServletRequestBuilder request1 = post("/string-example")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"author\":\"Dwayne\", \"content\":\"Firsties!\"}");
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .content("author=Dwayne&content=Firsties!");
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content("{\"author\":\"Dwayne\", \"content\":\"Firsties!\"}");
 
 
         this.mvc.perform(request1)
