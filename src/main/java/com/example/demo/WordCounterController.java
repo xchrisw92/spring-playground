@@ -11,10 +11,11 @@ import java.util.Map;
 @RestController
 public class WordCounterController {
 
-    private WordCounter wordCounter;
+    private final WordCounter wordCounter;
     public WordCounterController(WordCounter counter){
         this.wordCounter = counter;
     }
+
     @PostMapping("/words/count")
     public Map<String, Integer> getWordCount(@RequestBody String input){
        return wordCounter.count(input);

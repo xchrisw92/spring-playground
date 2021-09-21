@@ -2,27 +2,28 @@ package com.example.demo;
 
 
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
-
+@Service
 public class WordCounter {
     private  Map<String, Integer> wordCountMap = new HashMap<>();
-    private String inputData;
+
 
     public  Map<String, Integer> count(String input) {
-        this.inputData = input.toLowerCase();
-        String[] inputArray = inputData.split(" ");
+        Map<String, Integer> resultMap = new HashMap<>();
+        String[] inputArray = input.split(" ");
         for (String s: inputArray) {
-            Integer wordOccurrence = wordCountMap.get(s);
+            Integer wordOccurrence = resultMap.get(s);
             if (wordOccurrence == null) {
-                wordCountMap.put(s, 1);
+                resultMap.put(s, 1);
             } else {
-                wordCountMap.put(s, wordOccurrence + 1);
+                resultMap.put(s, wordOccurrence + 1);
             }
         }
-        return wordCountMap;
+        return resultMap;
     }
 
 }
